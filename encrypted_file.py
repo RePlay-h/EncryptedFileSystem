@@ -8,6 +8,7 @@ class EFile(ABC):
     
     @abstractmethod
     def read(filename, flag):
+
         enc = "utf-32" if flag else "utf-8"
 
         with open(filename, mode="r",  encoding=enc) as f:
@@ -21,12 +22,16 @@ class EFile(ABC):
 
     @abstractmethod
     def encode(buffer, delta):
+
+        # use Caesar's cipher for symbols
         for i in range(len(buffer)):
             buffer[i] = chr(ord(buffer[i]) + delta)
         return buffer
 
     @abstractmethod
     def decode(buffer, delta):
+
+        # use reverse Caesar's cipher for symbols
         for i in range(len(buffer)):
             buffer[i] = chr(ord(buffer[i]) - delta)
         return buffer
